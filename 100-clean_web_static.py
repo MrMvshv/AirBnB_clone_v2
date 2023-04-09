@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" deletes out-of-date archives, using the function do_clean"""
+# Fabric script to delete out-of-date archives
 import os
 from fabric.api import *
 
@@ -24,6 +24,6 @@ def do_clean(number=0):
 
     with cd("/data/web_static/releases"):
         archives = run("ls -tr").split()
-        [a for a in archives if "web_static_" in a]
+        archives = [a for a in archives if "web_static_" in a]
         [archives.pop() for n in range(num)]
         [run(f"rm -rf ./{ar}") for ar in archives]
