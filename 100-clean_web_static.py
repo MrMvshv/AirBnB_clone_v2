@@ -7,20 +7,22 @@ import os
 from fabric.api import *
 
 env.hosts = ['35.175.104.175', '34.224.5.166']
-env.user = 'ubuntu'
-env.key_filename = '~/.ssh/school'
 
 
 def do_clean(number=0):
     """ Deletes old archives """
-    number = int(number)
-    if number < 0:
-        return
-    elif number == 0:
-        number = 1
+    num = int(number)
+    
+    if num == 0:
+        num = 1
 
-    with lcd('./versions'):
-        local('ls -t | tail -n +{} | xargs rm -rf'.format(number))
+    archives = sorted(os.listdir("versions"))
+    [archives.pop() for n in range(num)]
 
-    with cd('/data/web_static/releases'):
-        run('ls -t | tail -n +{} | xargs rm -rf'.format(number))
+    with lcd("versions"):
+        [local(f"rm -rf ./{ar}") for ar in archives]
+
+    with cd("/data/web_static/releases"):
+        archives = run("ls -tr").split()
+        [archives.pop() for n in range(num)]
+        [run(f"rm -rf ./{ar}") for ar in archives]
