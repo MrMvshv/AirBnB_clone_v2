@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" deletes out-of-date archives, using the function do_clean"""
 import os
 from fabric.api import *
 
@@ -6,13 +7,9 @@ env.hosts = ['35.175.104.175', '34.224.5.166']
 
 
 def do_clean(number=0):
-    """Delete out-of-date archives
-
+    """Deletes out-of-date archives of the static files
     Args:
-        number (int): The number of archives to keep
-
-    If number = 0 or 1, keep the most recent archive only
-    If number = 2, keep 2 most recent archives, etc
+        number (Any): The number of archives to keep
     """
     num = int(number)
     
