@@ -1,7 +1,11 @@
 #!/usr/bin/python3
 """
-Creates and distributes an archive to web servers, using the function deploy():
-
+Fabric script methods:
+    do_pack: packs web_static/ files into .tgz archive
+    do_deploy: deploys archive to webservers
+    deploy: do_packs && do_deploys
+Usage:
+    fab -f 3-deploy_web_static.py deploy
 """
 
 # Import fabric
@@ -19,7 +23,7 @@ env.key_filename = '~/.ssh/school'
 
 def deploy():
     """
-        Archives and deploys the static files to the host servers.
+        Creates and distributes an archive to your web servers
     """
     # compress the archive
     path = do_pack()
