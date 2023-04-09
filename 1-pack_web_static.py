@@ -1,29 +1,26 @@
 #!/usr/bin/python3
-""" fabric script that generates a .tgz archive """
-import os
-from datetime import datetime
+""" fabric script to create an archive file"""
 from fabric.api import local
+from datetime import datetime
 
 
 def do_pack():
-    """ compress web_static and store in versions
-    Args:
-        no args
-    Returns:
-        path to created archive
-        if it failed - None
-    """
+    """ compress a file and return it's path """
 
-    """ save current time and full tgz path """
+    """save the current time and filename path"""
     time = datetime.now().strftime("%Y%m%d%H%M%S")
-    path = f"versions/web_static_{time}.tgz"
+    fPath = "versions/web_static_{}.tgz".format(time)
 
-    """ if folder does not exist, create it """
-    if not os.path.isdir("versions"):
-        if local(f"mkdir -p versions").failed is True:
-            return None
+    try:
+        """create directory called versions"""
+        local("mkdir -p versions")
 
-    """ create the archive and return path """ 
-    if local(f"tar -cvzf {path} web_static").failed is True:
+        """create archive file"""
+        local("tar -cvzf {} web_static/".format(fPath))
+
+        """return the path to the archive file created"""
+        return "{}".format(fPath)
+
+        """return none if an error occurs"""
+    except Exception as e:
         return None
-    return f"{path}"
