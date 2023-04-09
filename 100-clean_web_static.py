@@ -16,10 +16,8 @@ def do_clean(number=0):
     number = int(number)
     if number < 0:
         return
-    elif number == 0 or number == 1:
+    elif number == 0:
         number = 1
-    else:
-        number += 1
 
     with lcd('./versions'):
         local('ls -t | tail -n +{} | xargs rm -rf'.format(number))
