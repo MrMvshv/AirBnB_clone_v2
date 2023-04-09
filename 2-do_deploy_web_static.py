@@ -4,49 +4,46 @@ Fabric script to deploy web static content
 """
 
 from fabric.api import env, put, run
-from os.path import exists, basename, splitext
+import os.path
 
 env.hosts = ['35.175.104.175', '34.224.5.166']
 
 
 def do_deploy(archive_path):
+    """Distributes an archive to a web server.
+    Args:
+        archive_path (str): The path of the archive to distribute.
+    Returns:
+        If the file doesn't exist at archive_path or an error occurs - False.
+        Otherwise - True.
     """
-    Deploys an archive to the web servers
-    """
-    # Check if archive_path exists
-    if not exists(archive_path):
+    if os.path.isfile(archive_path) is False:
         return False
+    file = archive_path.split("/")[-1]
+    name = file.split(".")[0]
 
-    # Get the file name without extension
-    arName = basename(archive_path)
-    arStr = splitext(arName)[0]
-
-    try:
-        # Upload archive to the temporary folder on the web server
-        put(archive_path, "/tmp/")
-
-        # Create the directory where the code will be deployed
-        run(f"sudo mkdir -p /data/web_static/releases/{arStr}/")
-
-        # Uncompress the archive into the deployment folder
-        run(f"sudo tar -xzf /tmp/{arName} \
-                -C /data/web_static/releases/{arStr}/")
-
-        # Remove the archive from the server
-        run(f"sudo rm /tmp/{arName}")
-
-        # Move the files to a new folder and delete the old symbolic link
-        run(f"sudo mv /data/web_static/releases/{arStr}/web_static/* \
-            /data/web_static/releases/{arStr}/")
-        run(f"sudo rm -rf /data/web_static/releases/{arStr}/web_static")
-
-        # Delete the old symbolic link and create a new one
-        run("sudo rm -rf /data/web_static/current")
-        run(f"sudo ln -s /data/web_static/releases/{arStr}/ \
-                /data/web_static/current")
-
-        return True
-
-    except Exception as e:
-        # If there is an error, return False
+    if put(archive_path, "/tmp/{}".format(file)).failed is True:
         return False
+    if run("rm -rf /data/web_static/releases/{}/".
+           format(name)).failed is True:
+        return False
+    if run("mkdir -p /data/web_static/releases/{}/".
+           format(name)).failed is True:
+        return False
+    if run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/".
+           format(file, name)).failed is True:
+        return False
+    if run("rm /tmp/{}".format(file)).failed is True:
+        return False
+    if run("mv /data/web_static/releases/{}/web_static/* "
+           "/data/web_static/releases/{}/".format(name, name)).failed is True:
+        return False
+    if run("rm -rf /data/web_static/releases/{}/web_static".
+           format(name)).failed is True:
+        return False
+    if run("rm -rf /data/web_static/current").failed is True:
+        return False
+    if run("ln -s /data/web_static/releases/{}/ /data/web_static/current".
+           format(name)).failed is True:
+        return False
+    return True
