@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Fabric script to deploy web static content
-"""
+"""Fabric script to deploy web static content"""
 
 from fabric.api import env, put, run
 from os.path import exists, basename, splitext
@@ -10,9 +8,7 @@ env.hosts = ['35.175.104.175', '34.224.5.166']
 
 
 def do_deploy(archive_path):
-    """
-    Deploys an archive to the web servers
-    """
+    """Deploys an archive to the web servers"""
     # Check if archive_path exists
     if not exists(archive_path):
         return False
