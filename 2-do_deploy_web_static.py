@@ -13,9 +13,9 @@ env.hosts = ['35.175.104.175', '34.224.5.166']
 
 def do_deploy(archive_path):
     """
-    This function deploys an archive to web servers.
+    This function deploys an archive to the web servers.
 
-    :param archive_path: path to archive
+    :param archive_path: The path to the archive to be deployed
     :type archive_path: str
     :return: True if deployed, False on error
     :rtype: bool
