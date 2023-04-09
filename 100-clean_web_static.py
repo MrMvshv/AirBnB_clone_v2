@@ -1,8 +1,4 @@
 #!/usr/bin/python3
-"""
-fabric script that deletes outdated
-archives
-"""
 import os
 from fabric.api import *
 
