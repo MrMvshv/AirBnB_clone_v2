@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""Fabric script that creates and
-distributes an archive to servers.
+"""
+Creates and distributes an archive to web servers, using the function deploy():
 """
 
 # Import fabric
@@ -17,8 +17,8 @@ env.key_filename = '~/.ssh/school'
 
 
 def deploy():
-    """ 
-    Does a full deployment to servers
+    """
+        Archives and deploys the static files to the host servers.
     """
     # compress the archive
     path = do_pack()
