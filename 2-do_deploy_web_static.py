@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
-"""
-This fabric script deploys an archive to remote server
-"""
+"""This fabric script deploys an archive to remote server"""
 import os
 from fabric.api import put, env, run
 
@@ -13,10 +11,9 @@ env.key_filename = '~/.ssh/school'
 
 
 def do_deploy(archive_path):
-    """
-    This function sends archive and extracts on server
+    """This function sends archive and extracts on server
 
-    :param archive_path path to archive
+    :param archive_path: path to archive
     :type archive_path: str
     :return: if deployed - True, error - False
     :rtype: bool
