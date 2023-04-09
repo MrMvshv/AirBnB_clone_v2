@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-This fabric script deploys an archive to remote server.
+This fabric script deploys web static content to remote servers.
 """
 
 import os
@@ -13,7 +13,7 @@ env.hosts = ['35.175.104.175', '34.224.5.166']
 
 def do_deploy(archive_path):
     """
-    This function sends archive and extracts on server.
+    This function deploys an archive to web servers.
 
     :param archive_path: path to archive
     :type archive_path: str
