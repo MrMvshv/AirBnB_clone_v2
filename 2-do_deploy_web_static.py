@@ -12,14 +12,14 @@ env.hosts = ['35.175.104.175', '34.224.5.166']
 
 
 def do_deploy(archive_path):
-    """This function sends archive and extracts on server.
+    """
+    This function sends archive and extracts on server.
 
     :param archive_path: path to archive
     :type archive_path: str
-    :return: if deployed - True, error - False
+    :return: True if deployed, False on error
     :rtype: bool
     """
-
     # Check if archive exists
     if not os.path.exists(archive_path):
         return False
