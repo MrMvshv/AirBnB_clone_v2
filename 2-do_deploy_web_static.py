@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
-"""
-This fabric script distributes web static content to remote servers.
-"""
+"""web server distribution"""
 
 import os
 from fabric.api import put, env, run
@@ -12,8 +10,7 @@ env.hosts = ['35.175.104.175', '34.224.5.166']
 
 
 def do_deploy(archive_path):
-    """distributes an archive to your web servers.
-    """
+    """distributes an archive to your web servers."""
     # Check if archive_path exists
     if not os.path.exists(archive_path):
         return False
