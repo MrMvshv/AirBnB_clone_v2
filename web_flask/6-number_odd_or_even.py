@@ -38,19 +38,22 @@ def Ptext(text):
 
 @app.route('/number/<int:n>')
 def number(n):
-    """Return if number"""
+    """Displays 'n is a number' only if <n> is an integer."""
     return f"{n} is a number"
 
 
 @app.route('/number_template/<int:n>')
 def number_t(n):
-    """Return template if number"""
+    """Displays an HTML page only if <n> is an integer."""
     return render_template('5-number.html', n=n)
 
 
 @app.route('/number_odd_or_even/<int:n>')
 def number_o(n):
-    """Return odd or even"""
+    """Displays an HTML page only if <n> is an integer.
+
+    States whether <n> is odd or even in the body.
+    """
     if n % 2 != 0:
         txt = 'odd'
     else:

@@ -38,13 +38,13 @@ def Ptext(text):
 
 @app.route('/number/<int:n>')
 def number(n):
-    """Displays number"""
+    """Displays 'n is a number' only if n is an integer."""
     return f"{n} is a number"
 
 
 @app.route('/number_template/<int:n>')
 def number_t(n):
-    """Displays number template"""
+    """Displays an HTML page only if <n> is an integer."""
     return render_template('5-number.html', n=n)
 
 
