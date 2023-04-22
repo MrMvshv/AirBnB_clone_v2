@@ -38,6 +38,7 @@ def Ptext(text):
 
 @app.route('/number/<int:n>')
 def number(n):
+    """Displays n"""
     return f"{n} is a number"
 
 

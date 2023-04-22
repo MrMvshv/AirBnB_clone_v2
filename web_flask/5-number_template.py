@@ -38,11 +38,13 @@ def Ptext(text):
 
 @app.route('/number/<int:n>')
 def number(n):
+    """Displays number"""
     return f"{n} is a number"
 
 
 @app.route('/number_template/<int:n>')
 def number_t(n):
+    """Displays number template"""
     return render_template('5-number.html', n=n)
 
 
