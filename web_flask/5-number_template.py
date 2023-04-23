@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-"""
-This script starts a Flask web app
-Listening on 0.0.0.0:5000
+"""This script starts a Flask web app
+The app listens on 0.0.0.0, port 5000
 """
 from flask import Flask, render_template
 
@@ -23,7 +22,9 @@ def hbnb():
 
 @app.route('/c/<text>')
 def Ctext(text):
-    """Displays C text"""
+    """Displays 'C' followed by <text> value.
+    Replaces any underscores in <text> with slashes.
+    """
     text = text.replace('_', ' ')
     return 'C %s' % text
 
@@ -31,14 +32,17 @@ def Ctext(text):
 @app.route('/python/', defaults={'text': 'is cool'})
 @app.route('/python/<text>')
 def Ptext(text):
-    """Displays Python text"""
+    """Displays 'Python' followed by <text> value.
+    Replaces any underscores in <text> with slashes.
+    """
     text = text.replace('_', ' ')
     return 'Python %s' % text
 
 
 @app.route('/number/<int:n>')
 def number(n):
-    """Displays 'n is a number' only if n is an integer."""
+    """Displays 'n is a number' only if n is an integer.
+    """
     return f"{n} is a number"
 
 
