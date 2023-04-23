@@ -44,10 +44,11 @@ class DBStorage:
         Query on current DB session all objects of the given cls
         If cls is None, queries all types of objects
         Return:
-            A Dict of queried classes in the format <class name>.<obj id> = obj.
+            A Dict of queried classes in the
+            format <class name>.<obj id> = obj.
         """
         classes = {"User": User, "State": State, "City": City,
-           "Amenity": Amenity, "Place": Place, "Review": Review}
+                   "Amenity": Amenity, "Place": Place, "Review": Review}
 
         dict = {}
         if cls is None:
@@ -94,9 +95,9 @@ class DBStorage:
         """
         create all tables, create current db session
         """
-       # mapper_registry.metadata.create_all(self.__engine)
         Base.metadata.create_all(self.__engine)
-        session_maker = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_maker = sessionmaker(bind=self.__engine,
+                                     expire_on_commit=False)
         self.__session = scoped_session(session_maker)()
 
     def close(self):
