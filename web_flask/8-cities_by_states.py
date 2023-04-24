@@ -9,6 +9,7 @@ from models import storage
 
 app = Flask(__name__)
 
+
 @app.route("/cities_by_states", strict_slashes=False)
 def cities_by_states():
     """Displays an HTML page with a list of all states and their cities.
@@ -16,6 +17,7 @@ def cities_by_states():
     """
     data = storage.all("State")
     return render_template("8-cities_by_states.html", data=data)
+
 
 @app.teardown_appcontext
 def teardown(exc):
