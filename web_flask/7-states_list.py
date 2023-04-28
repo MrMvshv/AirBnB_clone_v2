@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""Starts a Flask web app.
-The applistens on 0.0.0.0, port 5000.
+"""
+Starts a Flask web app.
+The application listens on 0.0.0.0, port 5000.
 Routes:
-    /states_list: Displays a HTML page
+    /states_list: HTML page
 """
 from flask import Flask, render_template
 from models import storage
