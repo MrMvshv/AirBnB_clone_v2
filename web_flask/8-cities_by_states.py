@@ -4,8 +4,9 @@ The applistens on 0.0.0.0, port 5000.
 Routes:
     /states_list: Displays a HTML page
 """
-from flask import Flask, render_template
 from models import storage
+from flask import Flask, render_template
+from models.state import State
 
 app = Flask(__name__)
 
@@ -15,7 +16,7 @@ def cities_by_states():
     """Displays an HTML page with a list of all states and their cities.
     States/cities are sorted by name.
     """
-    data = storage.all("State")
+    data = storage.all(State)
     return render_template("8-cities_by_states.html", data=data)
 
 

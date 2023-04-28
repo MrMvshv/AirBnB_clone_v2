@@ -8,6 +8,7 @@ Routes:
 """
 from flask import Flask, render_template
 from models import storage
+from models.state import State
 
 app = Flask(__name__)
 
@@ -17,14 +18,14 @@ def states():
     """Displays an HTML page with a list of all states
     States are sorted by name.
     """
-    data = storage.all("State")
+    data = storage.all(State)
     return render_template("9-states.html", state=data)
 
 
 @app.route("/states/<id>", strict_slashes=False)
 def states_id(id):
     """Displays an HTML page with info about <id>, if it exists."""
-    for state in storage.all("State").values():
+    for state in storage.all(State).values():
         if state.id == id:
             return render_template("9-states.html", state=state)
     return render_template("9-states.html")
