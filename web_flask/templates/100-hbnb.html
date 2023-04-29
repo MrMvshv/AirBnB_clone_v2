@@ -20,20 +20,17 @@
           <H3>States</H3>
           <H4>&nbsp;</H4>
           <DIV class="popover">
-            <UL>
             {% for state in states|sort(attribute="name") %}
-              <LI><STRONG>{{ state.name }}</STRONG>
+              <H2>{{ state.name }}</H2>
                 <UL>
                 {% for city in state.cities|sort(attribute="name") %}
                   <LI>{{ city.name }}</LI>
                 {% endfor %}
                 </UL>
-              </LI>
             {% endfor %}
-            </UL>
           </DIV>
-
-        </DIV><DIV class="amenities">
+	</DIV>
+	<DIV class="amenities">
           <H3>Amenities</H3>
           <H4>&nbsp;</H4>
           <UL class="popover">
@@ -50,18 +47,20 @@
           {% for place in places|sort(attribute="name") %}
           <ARTICLE>
             <H2>{{ place.name }}</H2>
-            <DIV class="price_by_night">
-		<P>{{ place.price_by_night }}<P>
-	    </DIV>
+            <DIV class="price_by_night">${{ place.price_by_night }}</DIV>
 
             <DIV class="information">
               <DIV class="max_guest">
                 <DIV class="icon_guest"></DIV>
                 <BR>{{ place.max_guest }} Guests
               </DIV>
-              <DIV class="number_bathrooms">
+              <DIV class="number_rooms">
                 <DIV class="icon_bath"></DIV>
                 <BR>{{ place.number_rooms }} Rooms
+              </DIV>
+              <DIV class="number_bathrooms">
+                <DIV class="icon_bath"></DIV>
+                <BR>{{ place.number_bathrooms }} Bathrooms
               </DIV>
             </DIV>
 
@@ -70,25 +69,6 @@
             </DIV>
 
             <DIV class="description">{{ place.description|safe }}</DIV>
-
-            <DIV class="amenities">
-              <H2>Amenities</H2>
-              {% for amenity in place.amenities|sort(attribute="name") %}
-              <UL>
-                <LI><P>{{ amenity.name }}</P></LI>
-              </UL>
-              {% endfor %}
-            </DIV>
-
-            <DIV class="reviews">
-              <H2>{{ place.reviews.__len__() }} Reviews</H2>
-              {% for review in place.reviews %}
-              <H3>From {{ review.user.first_name }} the {{ review.created_at.date().__str__() }}</H3>
-              <UL>
-                <LI><P>{{ review.text|safe }}</P></LI>
-              </UL>
-            {% endfor %}
-            </DIV>
           </ARTICLE>
           {% endfor %}
         </SECTION>

@@ -19,6 +19,8 @@
   article h2 {
     font-size: 30px;
     margin-top: 5px;
+    margin-right: 25px;
+    width: 75%;
   }
   /* structure within boxed lists of places */
   div.price_by_night {
@@ -41,7 +43,7 @@
   div.max_guest,
   div.number_rooms,
   div.number_bathrooms {
-    line-height: 140px;
+    line-height: 40px;
     width: 100px;
     height: 100%;
     display: inline-block;
